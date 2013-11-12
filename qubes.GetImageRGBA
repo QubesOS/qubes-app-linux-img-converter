@@ -1,0 +1,6 @@
+set -e
+read filename
+[ x"$filename" = x"-" ] || [ x"$filename" = x*":-" ] || [ -r "$filename" ]
+identify -format '%w %h' "$filename"
+convert -depth 8 "$filename" rgba:-
+# vim:ft=sh

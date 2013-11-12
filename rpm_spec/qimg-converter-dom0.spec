@@ -1,0 +1,62 @@
+#
+# This is the SPEC file for creating binary and source RPMs for the VMs.
+#
+#
+# The Qubes OS Project, http://www.qubes-os.org
+#
+# Copyright (C) 2013  Joanna Rutkowska <joanna@invisiblethingslab.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+#
+#
+
+%{!?version: %define version %(cat version)}
+
+Name:		qubes-img-converter-dom0
+Version:	%{version}
+Release:	1%{dist}
+Summary:    	The infrastructure for converting images to trusted ones
+
+Group:		Qubes
+Vendor:		Invisible Things Lab
+License:	GPL
+URL:		http://www.qubes-os.org
+
+%define _builddir %(pwd)
+
+%description
+The infrastructure for converting images to trusted ones
+
+%prep
+# we operate on the current directory, so no need to unpack anything
+
+%build
+
+%install
+rm -rf $RPM_BUILD_ROOT
+install -D qubes.GetImageRGBA.policy $RPM_BUILD_ROOT/etc/qubes_rpc/policy/qubes.GetImageRGBA
+install -D qvm-get-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-image
+install -D qvm-get-tinted-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-tinted-image
+install -D imgconverter.py $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root,-)
+/usr/libexec/qubes/qvm-get-image
+/usr/libexec/qubes/qvm-get-tinted-image
+/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+%config(noreplace) %attr(0664,root,qubes) /etc/qubes_rpc/policy/qubes.GetImageRGBA
