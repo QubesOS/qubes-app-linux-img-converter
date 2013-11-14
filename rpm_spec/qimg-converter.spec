@@ -50,8 +50,6 @@ The Qubes service for converting untrusted images into trusted ones.
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/
-install -D qimg-convert-client $RPM_BUILD_ROOT/usr/libexec/qubes/qimg-convert-client
-install -D qvm-convert-img $RPM_BUILD_ROOT/usr/bin/qvm-convert-img
 install -D -m 0644 qubes.GetImageRGBA $RPM_BUILD_ROOT/etc/qubes_rpc/qubes.GetImageRGBA
 install -D imgconverter.py $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
 
@@ -60,8 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/libexec/qubes/qimg-convert-client
-/usr/bin/qvm-convert-img
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
 %attr(0644,root,root) /etc/qubes_rpc/qubes.GetImageRGBA

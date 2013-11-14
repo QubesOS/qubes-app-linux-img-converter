@@ -46,7 +46,6 @@ The infrastructure for converting images to trusted ones
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -D qubes.GetImageRGBA.policy $RPM_BUILD_ROOT/etc/qubes_rpc/policy/qubes.GetImageRGBA
 install -D qvm-get-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-image
 install -D qvm-get-tinted-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-tinted-image
 install -D imgconverter.py $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
@@ -60,4 +59,3 @@ rm -rf $RPM_BUILD_ROOT
 /usr/libexec/qubes/qvm-get-tinted-image
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
-%config(noreplace) %attr(0664,root,qubes) /etc/qubes_rpc/policy/qubes.GetImageRGBA
