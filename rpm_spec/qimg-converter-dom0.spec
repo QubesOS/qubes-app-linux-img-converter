@@ -59,4 +59,5 @@ rm -rf $RPM_BUILD_ROOT
 /usr/libexec/qubes/qvm-get-image
 /usr/libexec/qubes/qvm-get-tinted-image
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+/usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
 %config(noreplace) %attr(0664,root,qubes) /etc/qubes_rpc/policy/qubes.GetImageRGBA

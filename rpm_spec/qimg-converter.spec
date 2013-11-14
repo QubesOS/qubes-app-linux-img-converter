@@ -63,4 +63,5 @@ rm -rf $RPM_BUILD_ROOT
 /usr/libexec/qubes/qimg-convert-client
 /usr/bin/qvm-convert-img
 /usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+/usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
 %attr(0644,root,root) /etc/qubes_rpc/qubes.GetImageRGBA
