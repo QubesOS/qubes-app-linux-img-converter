@@ -5,6 +5,7 @@
 # The Qubes OS Project, http://www.qubes-os.org
 #
 # Copyright (C) 2013  Joanna Rutkowska <joanna@invisiblethingslab.com>
+# Copyright (C) 2014  Wojciech Porczyk <wojciech@porczyk.eu>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -27,17 +28,19 @@
 Name:		qubes-img-converter-dom0
 Version:	%{version}
 Release:	1%{dist}
-Summary:    	The infrastructure for converting images to trusted ones
+Summary:	The Qubes service for converting untrusted images into trusted ones
 
 Group:		Qubes
 Vendor:		Invisible Things Lab
 License:	GPL
 URL:		http://www.qubes-os.org
 
+Requires:	qubes-utils
+
 %define _builddir %(pwd)
 
 %description
-The infrastructure for converting images to trusted ones
+The Qubes service for converting untrusted images into trusted ones.
 
 %prep
 # we operate on the current directory, so no need to unpack anything
@@ -46,16 +49,14 @@ The infrastructure for converting images to trusted ones
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -D qvm-get-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-image
-install -D qvm-get-tinted-image $RPM_BUILD_ROOT/usr/libexec/qubes/qvm-get-tinted-image
-install -D imgconverter.py $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+install -d $RPM_BUILD_ROOT/usr/bin/
+install -D qvm-get-image $RPM_BUILD_ROOT/usr/bin/qvm-get-image
+install -D qvm-get-tinted-image $RPM_BUILD_ROOT/usr/bin/qvm-get-tinted-image
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/libexec/qubes/qvm-get-image
-/usr/libexec/qubes/qvm-get-tinted-image
-/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
-/usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
+/usr/bin/qvm-get-image
+/usr/bin/qvm-get-tinted-image

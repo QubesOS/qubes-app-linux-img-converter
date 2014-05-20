@@ -1,0 +1,49 @@
+#!/usr/bin/python2 -O
+# -*- coding: utf-8 -*-
+
+# The Qubes OS Project, http://www.qubes-os.org
+#
+# Copyright (C) 2014  Wojciech Porczyk <wojciech@porczyk.eu>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+from __future__ import print_function
+
+import argparse
+import qubes.imgconverter
+
+parser = argparse.ArgumentParser(
+        description='Trustify image',
+        epilog='Both SRC and DST may specify format in ImageMagick(1) way,\n'
+        'i.e. png:aqq.gif')
+
+parser.add_argument('--progress', action='store_true',
+    help='Print percentage (for zenity --progress)')
+parser.add_argument('src', metavar='SRC', help='Source path')
+parser.add_argument('dst', metavar='DST', help='Destination path')
+
+def main():
+    args = parser.parse_args()
+
+    if args.progress: print('0')
+    img = qubes.imgconverter.Image.get_through_dvm(args.src)
+    if args.progress: print('50')
+    img.save(args.dst)
+    if args.progress: print('100')
+
+if __name__ == '__main__':
+    main()
+
+# vim: ft=python sw=4 ts=4 et

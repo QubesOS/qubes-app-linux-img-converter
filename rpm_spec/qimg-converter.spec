@@ -5,6 +5,7 @@
 # The Qubes OS Project, http://www.qubes-os.org
 #
 # Copyright (C) 2013  Joanna Rutkowska <joanna@invisiblethingslab.com>
+# Copyright (C) 2014  Wojciech Porczyk <wojciech@porczyk.eu>
 #
 # This program is free software; you can redistribute it and/or
 # modify it under the terms of the GNU General Public License
@@ -34,7 +35,7 @@ Vendor:		Invisible Things Lab
 License:	GPL
 URL:		http://www.qubes-os.org
 
-Requires:	poppler-utils ImageMagick
+Requires:	qubes-utils
 Requires:	nautilus-actions
 
 %define _builddir %(pwd)
@@ -49,15 +50,20 @@ The Qubes service for converting untrusted images into trusted ones.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/
-install -D -m 0644 qubes.GetImageRGBA $RPM_BUILD_ROOT/etc/qubes_rpc/qubes.GetImageRGBA
-install -D imgconverter.py $RPM_BUILD_ROOT/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
+install -d $RPM_BUILD_ROOT/usr/bin/
+install -D qvm-convert-img $RPM_BUILD_ROOT/usr/bin/qvm-convert-img
+install -D qvm-convert-img-gnome $RPM_BUILD_ROOT/usr/bin/qvm-convert-img-gnome
+install -d $RPM_BUILD_ROOT/usr/libexec/qubes/
+install -D qimg-convert-client $RPM_BUILD_ROOT/usr/libexec/qubes/qimg-convert-client
+install -d $RPM_BUILD_ROOT/usr/share/file-manager/actions
+install -D qvm-convert-img-gnome.desktop $RPM_BUILD_ROOT/usr/share/file-manager/actions/qvm-convert-img-gnome.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-/usr/lib64/python2.7/site-packages/qubes/imgconverter.py
-/usr/lib64/python2.7/site-packages/qubes/imgconverter.py[co]
-%attr(0644,root,root) /etc/qubes_rpc/qubes.GetImageRGBA
+/usr/bin/qvm-convert-img
+/usr/bin/qvm-convert-img-gnome
+/usr/libexec/qubes/qimg-convert-client
+/usr/share/file-manager/actions/qvm-convert-img-gnome.desktop
