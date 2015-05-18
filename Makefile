@@ -51,8 +51,8 @@ install-vm:
 	install -D qvm-convert-img-gnome $(DESTDIR)/usr/bin/qvm-convert-img-gnome
 	install -d $(DESTDIR)/usr/libexec/qubes/
 	install -D qimg-convert-client $(DESTDIR)/usr/libexec/qubes/qimg-convert-client
-	install -d $(DESTDIR)/usr/share/file-manager/actions
-	install -D qvm-convert-img-gnome.desktop $(DESTDIR)/usr/share/file-manager/actions/qvm-convert-img-gnome.desktop
+	install -d $(DESTDIR)/usr/share/nautilus-python/extensions
+	install -D qvm_convert_img_nautilus.py $(DESTDIR)/usr/share/nautilus-python/extensions/qvm_convert_img_nautilus.py
 
 update-repo-current:
 	for vmrepo in ../yum/current-release/current/vm/* ; do \

@@ -36,7 +36,7 @@ License:	GPL
 URL:		http://www.qubes-os.org
 
 Requires:	qubes-utils
-Requires:	nautilus-actions
+Requires:	nautilus-python
 
 %define _builddir %(pwd)
 
@@ -60,4 +60,4 @@ rm -rf $RPM_BUILD_ROOT
 /usr/bin/qvm-convert-img
 /usr/bin/qvm-convert-img-gnome
 /usr/libexec/qubes/qimg-convert-client
-/usr/share/file-manager/actions/qvm-convert-img-gnome.desktop
+/usr/share/nautilus-python/extensions/qvm_convert_img_nautilus.py*
