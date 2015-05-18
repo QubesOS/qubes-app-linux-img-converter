@@ -50,13 +50,7 @@ The Qubes service for converting untrusted images into trusted ones.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/bin/
-install -D qvm-convert-img $RPM_BUILD_ROOT/usr/bin/qvm-convert-img
-install -D qvm-convert-img-gnome $RPM_BUILD_ROOT/usr/bin/qvm-convert-img-gnome
-install -d $RPM_BUILD_ROOT/usr/libexec/qubes/
-install -D qimg-convert-client $RPM_BUILD_ROOT/usr/libexec/qubes/qimg-convert-client
-install -d $RPM_BUILD_ROOT/usr/share/file-manager/actions
-install -D qvm-convert-img-gnome.desktop $RPM_BUILD_ROOT/usr/share/file-manager/actions/qvm-convert-img-gnome.desktop
+make install-vm DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
