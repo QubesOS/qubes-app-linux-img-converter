@@ -1,0 +1,15 @@
+Source: qubes-img-converter
+Section: utils
+Priority: optional
+Maintainer: unman <unman@thirdeyesecurity.org>
+Build-Depends: debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: http://www.qubes-os.org/
+
+Package: qubes-img-converter-vm
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qubes service for converting untrusted images into trusted ones.
+ This is the VM part of the image converter service. It requires the
+ service to be running in dom0.
+

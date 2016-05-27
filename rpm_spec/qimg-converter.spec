@@ -58,6 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 /usr/bin/qvm-convert-img
-/usr/bin/qvm-convert-img-gnome
-/usr/libexec/qubes/qimg-convert-client
+/usr/lib/qubes/qvm-convert-img.gnome
+%{_mandir}/man1/qvm-convert-img.1*
+/usr/lib/qubes/qimg-convert-client
 /usr/share/nautilus-python/extensions/qvm_convert_img_nautilus.py*

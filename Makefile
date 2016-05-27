@@ -48,11 +48,13 @@ install: install-vm
 install-vm:
 	install -d $(DESTDIR)/usr/bin/
 	install -D qvm-convert-img $(DESTDIR)/usr/bin/qvm-convert-img
-	install -D qvm-convert-img-gnome $(DESTDIR)/usr/bin/qvm-convert-img-gnome
-	install -d $(DESTDIR)/usr/libexec/qubes/
-	install -D qimg-convert-client $(DESTDIR)/usr/libexec/qubes/qimg-convert-client
+	install -d  $(DESTDIR)/usr/lib/qubes/
+	install -D qvm-convert-img.gnome $(DESTDIR)/usr/lib/qubes/qvm-convert-img.gnome
+	install -d $(DESTDIR)/usr/lib/qubes/
+	install -D qimg-convert-client $(DESTDIR)/usr/lib/qubes/qimg-convert-client
 	install -d $(DESTDIR)/usr/share/nautilus-python/extensions
 	install -D qvm_convert_img_nautilus.py $(DESTDIR)/usr/share/nautilus-python/extensions/qvm_convert_img_nautilus.py
+	install -D qvm-convert-img.1  $(DESTDIR)/usr/share/man/man1/qvm-convert-img.1
 
 update-repo-current:
 	for vmrepo in ../yum/current-release/current/vm/* ; do \

@@ -1,0 +1,22 @@
+.TH qvm-img-convert 1
+.SH NAME
+qvm-img-convert \- convert image file to simple trusted representation
+.SH SYNOPSIS
+.B qvm-img-convert
+.IR input-file 
+.IR output-file 
+.SH DESCRIPTION
+.B qvm-img-convert
+modifies image files by processing them using the 
+.B convert
+tool from imagemagick. Processing is done in a disposable qube, and the
+converted file stored in
+.B output-file
+Conversion is done to a very simple RGBA representation of the image.
+Any metadata in the original file is removed.
+
+If input-file and output-file are identical then the file is simply overwritten.
+.SH SEE ALSO
+ImageMagick(1),
+convert(1),
+qvm-pdf-convert(1)

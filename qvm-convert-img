@@ -2,7 +2,10 @@
 
 set -e
 
-[[ $# -eq 2 ]]
+if [ $# -ne 2 ] ; then
+        echo usage: $0 '<img to convert> <location converted file>'
+        exit 1
+fi
 
 exec /usr/lib/qubes/qrexec-client-vm '$dispvm' qubes.GetImageRGBA \
-	/usr/libexec/qubes/qimg-convert-client "$@"
+	/usr/lib/qubes/qimg-convert-client "$@"

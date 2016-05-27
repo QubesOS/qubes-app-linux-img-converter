@@ -1,0 +1,20 @@
+qubes-img-converter (1.2.0) - 2016-05-27
+
+  * ADDED Debian support
+  * CHANGED paths and filenames to cohere with qubes-convert-pdf
+  * FIXED blocking use of --progress in convert call.
+
+ -- unman <unman@thirdeyesecurity.org> 
+
+qubes-img-converter (1.1.1) - 2015-05-18
+
+  * CHANGED file installation from rpm spec to Makefile
+  * CHANGED nautilus support to use nautilus-python extensions
+
+ --  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+
+qubes-img-converter (1.1.0) - 2014-09-22
+
+  * Initial release 
+
+ --  Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
