@@ -1,3 +1,10 @@
+qubes-img-converter (1.2.1-1) wheezy; urgency=medium
+
+  [ unman ]
+  * 
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sun, 17 Jul 2016 01:26:58 +0200
+
 qubes-img-converter (1.2.0-1) stable; urgency=low
 
   * Initial release Debian
