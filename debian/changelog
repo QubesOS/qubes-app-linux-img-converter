@@ -1,3 +1,9 @@
+qubes-img-converter (1.2.2-1) wheezy; urgency=medium
+
+  * debian: adjust package name
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sun, 17 Jul 2016 02:25:54 +0200
+
 qubes-img-converter (1.2.1-1) wheezy; urgency=medium
 
   [ unman ]
