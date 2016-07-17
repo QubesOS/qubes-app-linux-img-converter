@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 9)
 Standards-Version: 3.9.6
 Homepage: http://www.qubes-os.org/
 
-Package: qubes-img-converter-vm
+Package: qubes-img-converter
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Qubes service for converting untrusted images into trusted ones.
