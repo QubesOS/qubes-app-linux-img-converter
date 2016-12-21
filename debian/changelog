@@ -1,3 +1,11 @@
+qubes-img-converter (1.2.3-1) unstable; urgency=medium
+
+  [ Nicklaus McClendon ]
+  * Updated manpage to have correct binary name
+  * Removed .travis.yml bootstrap fix
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Wed, 21 Dec 2016 16:55:22 +0100
+
 qubes-img-converter (1.2.2-1) wheezy; urgency=medium
 
   * debian: adjust package name
