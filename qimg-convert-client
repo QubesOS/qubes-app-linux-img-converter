@@ -22,7 +22,11 @@
 from __future__ import print_function
 
 import argparse
-import qubes.imgconverter
+try:
+    import qubesimgconverter
+except ImportError:
+    import qubes.imgconverter as qubesimgconverter
+
 
 parser = argparse.ArgumentParser(
         description='Trustify image',
@@ -38,7 +42,7 @@ def main():
     args = parser.parse_args()
 
     if args.progress: print('0')
-    img = qubes.imgconverter.Image.get_through_dvm(args.src)
+    img = qubesimgconverter.Image.get_through_dvm(args.src)
     if args.progress: print('50')
     img.save(args.dst)
     if args.progress: print('100')
