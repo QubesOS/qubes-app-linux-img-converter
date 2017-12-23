@@ -1,3 +1,10 @@
+qubes-img-converter (1.2.4-1) unstable; urgency=medium
+
+  * Update module name for Qubes 4.0
+  * travis: update distributions list
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 23 Dec 2017 02:29:44 +0100
+
 qubes-img-converter (1.2.3-1) unstable; urgency=medium
 
   [ Nicklaus McClendon ]
