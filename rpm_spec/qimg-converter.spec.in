@@ -23,10 +23,9 @@
 #
 #
 
-%{!?version: %define version %(cat version)}
 
 Name:		qubes-img-converter
-Version:	%{version}
+Version:	@VERSION@
 Release:	1%{dist}
 Summary:	The Qubes service for converting untrusted images into trusted ones
 
@@ -38,15 +37,14 @@ URL:		http://www.qubes-os.org
 Requires:	qubes-utils
 Requires:	nautilus-python
 
-%define _builddir %(pwd)
+
+Source0: %{name}-%{version}.tar.gz
 
 %description
 The Qubes service for converting untrusted images into trusted ones.
 
 %prep
-# we operate on the current directory, so no need to unpack anything
-
-%build
+%setup -q
 
 %install
 rm -rf $RPM_BUILD_ROOT
