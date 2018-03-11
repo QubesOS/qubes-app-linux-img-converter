@@ -15,36 +15,38 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+# along with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 
-import argparse
-import qubes.qubes
-import qubes.imgconverter
+import qubesadmin.tools
+import qubesimgconverter
+import sys
 
-parser = argparse.ArgumentParser(
+parser = qubesadmin.tools.QubesArgumentParser(
+        vmname_nargs=1,
         description='Secure copy of images between virtual machines',
         epilog='Both SRC and DST may specify format in ImageMagick(1) way,\n'
         'i.e. png:aqq.gif')
 
-parser.add_argument('vmname', metavar='VMNAME', help='Source VM')
 parser.add_argument('src', metavar='SRC', help='Path inside source VM')
 parser.add_argument('dst', metavar='DST', help='Destination path in this VM')
 
+
 def main():
     args = parser.parse_args()
-    
-    qvm_collection = qubes.qubes.QubesVmCollection()
-    qvm_collection.lock_db_for_reading()
-    qvm_collection.load()
-    qvm_collection.unlock_db()
+    domains = args.domains or args.app.domains
 
-    vm = qvm_collection.get_vm_by_name(args.vmname)
+    if not domains:
+        print("No domain found") >> sys.stderr
+        return
+    else:
+        vm = domains[0]
 
     if vm is None:
         parser.error('No such VM: {0}'.format(args.vmname))
 
-    qubes.imgconverter.Image.get_from_vm(vm, args.src).save(args.dst)
+    qubesimgconverter.Image.get_from_vm(vm, args.src).save(args.dst)
+
 
 if __name__ == '__main__':
     main()
