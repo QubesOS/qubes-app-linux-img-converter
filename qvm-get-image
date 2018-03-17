@@ -33,13 +33,7 @@ parser.add_argument('dst', metavar='DST', help='Destination path in this VM')
 
 def main():
     args = parser.parse_args()
-    domains = args.domains or args.app.domains
-
-    if not domains:
-        parser.error("No domain found")
-        return
-    else:
-        vm = domains[0]
+    vm = args.domains[0]
 
     if vm is None:
         parser.error('No such VM: {0}'.format(args.vmname))
