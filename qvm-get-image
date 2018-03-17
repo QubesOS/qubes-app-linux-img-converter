@@ -20,7 +20,6 @@
 
 import qubesadmin.tools
 import qubesimgconverter
-import sys
 
 parser = qubesadmin.tools.QubesArgumentParser(
         vmname_nargs=1,
@@ -37,7 +36,7 @@ def main():
     domains = args.domains or args.app.domains
 
     if not domains:
-        print("No domain found") >> sys.stderr
+        parser.error("No domain found")
         return
     else:
         vm = domains[0]
