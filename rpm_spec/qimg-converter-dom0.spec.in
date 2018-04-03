@@ -58,3 +58,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 /usr/bin/qvm-get-image
 /usr/bin/qvm-get-tinted-image
+
+%changelog
+@CHANGELOG@
