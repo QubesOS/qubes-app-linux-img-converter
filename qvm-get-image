@@ -15,31 +15,49 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software Foundation, Inc.,
-# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import qubesadmin.tools
-import qubesimgconverter
+import argparse
+try:
+    import qubesadmin
+    import qubesimgconverter
+    qubes4 = True
+except ImportError:
+    import qubes.qubes
+    import qubes.imgconverter as qubesimgconverter
+    qubes4 = False
 
-parser = qubesadmin.tools.QubesArgumentParser(
-        vmname_nargs=1,
+parser = argparse.ArgumentParser(
         description='Secure copy of images between virtual machines',
         epilog='Both SRC and DST may specify format in ImageMagick(1) way,\n'
         'i.e. png:aqq.gif')
 
+parser.add_argument('vmname', metavar='VMNAME', help='Source VM')
 parser.add_argument('src', metavar='SRC', help='Path inside source VM')
 parser.add_argument('dst', metavar='DST', help='Destination path in this VM')
 
-
 def main():
     args = parser.parse_args()
-    vm = args.domains[0]
+
+    if qubes4:
+        app = qubesadmin.Qubes()
+        try:
+            vm = app.domains[args.vmname]
+        except KeyError:
+            vm = None
+    else:
+        qvm_collection = qubes.qubes.QubesVmCollection()
+        qvm_collection.lock_db_for_reading()
+        qvm_collection.load()
+        qvm_collection.unlock_db()
+
+        vm = qvm_collection.get_vm_by_name(args.vmname)
 
     if vm is None:
         parser.error('No such VM: {0}'.format(args.vmname))
 
     qubesimgconverter.Image.get_from_vm(vm, args.src).save(args.dst)
-
 
 if __name__ == '__main__':
     main()
