@@ -36,6 +36,7 @@ URL:		http://www.qubes-os.org
 
 Requires:	qubes-utils
 Requires:	nautilus-python
+Requires:	python2-qubesimgconverter
 
 
 Source0: %{name}-%{version}.tar.gz
