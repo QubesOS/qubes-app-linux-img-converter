@@ -1,3 +1,11 @@
+qubes-img-converter (1.2.6-1) unstable; urgency=medium
+
+  * debian: don't create orig.tar.gz manually
+  * rpm: add R: python2-qubesimgconverter
+  * travis: update Fedora and Debian versions
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Fri, 22 Mar 2019 00:16:55 +0100
+
 qubes-img-converter (1.2.5-1) unstable; urgency=medium
 
   [ Frédéric Pierret ]
