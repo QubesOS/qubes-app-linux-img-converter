@@ -22,6 +22,7 @@
 from __future__ import print_function
 
 import argparse
+import os
 try:
     import qubesimgconverter
 except ImportError:
@@ -41,11 +42,13 @@ parser.add_argument('dst', metavar='DST', help='Destination path')
 def main():
     args = parser.parse_args()
 
-    if args.progress: print('0')
+    if args.progress:
+        orig_stdout = open(int(os.environ['SAVED_FD_1']), 'w')
+        print('10', file=orig_stdout)
     img = qubesimgconverter.Image.get_through_dvm(args.src)
-    if args.progress: print('50')
+    if args.progress: print('50', file=orig_stdout)
     img.save(args.dst)
-    if args.progress: print('100')
+    if args.progress: print('100', file=orig_stdout)
 
 if __name__ == '__main__':
     main()
