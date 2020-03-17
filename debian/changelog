@@ -1,3 +1,18 @@
+qubes-img-converter (1.2.7-1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * travis: switch to bionic
+
+  [ Paweł Marczewski ]
+  * Use Python 3
+
+  [ Marek Marczykowski-Górecki ]
+  * One more python2->3 shebang change
+  * Fix progress reporting in qvm-convert-img-gnome
+  * Drop Qubes 3.x support
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Tue, 17 Mar 2020 03:53:26 +0100
+
 qubes-img-converter (1.2.6-1) unstable; urgency=medium
 
   * debian: don't create orig.tar.gz manually
