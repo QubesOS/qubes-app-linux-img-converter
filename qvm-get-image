@@ -19,14 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import argparse
-try:
-    import qubesadmin
-    import qubesimgconverter
-    qubes4 = True
-except ImportError:
-    import qubes.qubes
-    import qubes.imgconverter as qubesimgconverter
-    qubes4 = False
+import qubesadmin
+import qubesimgconverter
 
 parser = argparse.ArgumentParser(
         description='Secure copy of images between virtual machines',
@@ -40,19 +34,11 @@ parser.add_argument('dst', metavar='DST', help='Destination path in this VM')
 def main():
     args = parser.parse_args()
 
-    if qubes4:
-        app = qubesadmin.Qubes()
-        try:
-            vm = app.domains[args.vmname]
-        except KeyError:
-            vm = None
-    else:
-        qvm_collection = qubes.qubes.QubesVmCollection()
-        qvm_collection.lock_db_for_reading()
-        qvm_collection.load()
-        qvm_collection.unlock_db()
-
-        vm = qvm_collection.get_vm_by_name(args.vmname)
+    app = qubesadmin.Qubes()
+    try:
+        vm = app.domains[args.vmname]
+    except KeyError:
+        vm = None
 
     if vm is None:
         parser.error('No such VM: {0}'.format(args.vmname))

@@ -8,7 +8,7 @@ fi
 
 mv -f "${1}" "${1}-untrusted"
 
-exec /usr/lib/qubes/qrexec-client-vm '$dispvm' qubes.GetImageRGBA \
+exec /usr/lib/qubes/qrexec-client-vm '@dispvm' qubes.GetImageRGBA \
 	/usr/lib/qubes/qimg-convert-client "${1}-untrusted" "${1}" \
 | zenity --progress --text "Converting image using Disposable VM..." \
 	--auto-close --auto-kill

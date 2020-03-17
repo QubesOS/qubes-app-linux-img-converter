@@ -7,5 +7,5 @@ if [ $# -ne 2 ] ; then
         exit 1
 fi
 
-exec /usr/lib/qubes/qrexec-client-vm '$dispvm' qubes.GetImageRGBA \
+exec /usr/lib/qubes/qrexec-client-vm '@dispvm' qubes.GetImageRGBA \
 	/usr/lib/qubes/qimg-convert-client "$@"

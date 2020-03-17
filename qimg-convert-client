@@ -23,11 +23,7 @@ from __future__ import print_function
 
 import argparse
 import os
-try:
-    import qubesimgconverter
-except ImportError:
-    import qubes.imgconverter as qubesimgconverter
-
+import qubesimgconverter
 
 parser = argparse.ArgumentParser(
         description='Trustify image',
