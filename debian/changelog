@@ -1,3 +1,11 @@
+qubes-img-converter (1.2.8-1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * spec: fix hardcoded python3 prefix for CentOS
+  * travis: update with R4.1 jobs
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 18 Apr 2020 05:16:41 +0200
+
 qubes-img-converter (1.2.7-1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
