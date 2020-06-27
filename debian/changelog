@@ -1,3 +1,9 @@
+qubes-img-converter (1.2.9-1) unstable; urgency=medium
+
+  * debian: add python3-qubesimgconverter dependency
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 27 Jun 2020 15:01:00 +0200
+
 qubes-img-converter (1.2.8-1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
