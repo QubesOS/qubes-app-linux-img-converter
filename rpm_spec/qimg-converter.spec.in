@@ -34,10 +34,10 @@ Vendor:		Invisible Things Lab
 License:	GPL
 URL:		http://www.qubes-os.org
 
+BuildRequires:  make
 Requires:	qubes-utils
 Requires:	nautilus-python
 Requires:	python%{python3_pkgversion}-qubesimgconverter
-
 
 Source0: %{name}-%{version}.tar.gz
 
