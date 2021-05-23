@@ -1,3 +1,19 @@
+qubes-img-converter (1.2.10-1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * Update travis
+  * Add .gitlab-ci.yml
+  * spec: add BR make
+
+  [ ctrlaltf24 ]
+  * Created README.md
+  * Corrected accuracy error
+
+  [ Marek Marczykowski-Górecki ]
+  * Update README based on QubesOS/qubes-app-linux-pdf-converter#18
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sun, 23 May 2021 17:43:44 +0200
+
 qubes-img-converter (1.2.9-1) unstable; urgency=medium
 
   * debian: add python3-qubesimgconverter dependency
