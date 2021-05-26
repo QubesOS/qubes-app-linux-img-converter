@@ -7,5 +7,10 @@ if [ $# -ne 2 ] ; then
         exit 1
 fi
 
+if [ ! -f "$1" ] ; then
+        echo "image file does not exists: $1"
+        exit 1
+fi
+
 exec /usr/lib/qubes/qrexec-client-vm '@dispvm' qubes.GetImageRGBA \
 	/usr/lib/qubes/qimg-convert-client "$@"
