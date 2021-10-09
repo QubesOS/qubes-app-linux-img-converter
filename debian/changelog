@@ -1,3 +1,10 @@
+qubes-img-converter (1.2.11-1) unstable; urgency=medium
+
+  [ ejose19 ]
+  * fix: add existence check to image file
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 09 Oct 2021 04:31:57 +0200
+
 qubes-img-converter (1.2.10-1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
