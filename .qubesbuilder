@@ -1,0 +1,11 @@
+host:
+  rpm:
+    spec:
+    - rpm_spec/qimg-converter-dom0.spec
+vm:
+  rpm:
+    spec:
+    - rpm_spec/qimg-converter.spec
+  deb:
+    build:
+    - debian
