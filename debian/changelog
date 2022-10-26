@@ -1,3 +1,12 @@
+qubes-img-converter (1.2.12-1) unstable; urgency=medium
+
+  [ Frédéric Pierret (fepitre) ]
+  * Drop Travis CI
+  * Add Qubes Builder v2 integration
+  * .qubesbuilder: replace 'spec' by 'build'
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Thu, 27 Oct 2022 01:37:06 +0200
+
 qubes-img-converter (1.2.11-1) unstable; urgency=medium
 
   [ ejose19 ]
