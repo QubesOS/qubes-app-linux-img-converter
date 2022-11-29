@@ -1,3 +1,10 @@
+qubes-img-converter (1.2.13-1) unstable; urgency=medium
+
+  [ noskb ]
+  * qvm_convert_img_nautilus.py: adjust to work with Nautilus API 4.0
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Tue, 29 Nov 2022 04:07:11 +0100
+
 qubes-img-converter (1.2.12-1) unstable; urgency=medium
 
   [ Frédéric Pierret (fepitre) ]
