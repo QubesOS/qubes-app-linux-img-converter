@@ -27,7 +27,7 @@ import qubesimgconverter
 
 parser = argparse.ArgumentParser(
         description='Trustify image',
-        epilog='Both SRC and DST may specify format in ImageMagick(1) way,\n'
+        epilog='Both SRC and DST may specify format in gm(1) way,\n'
         'i.e. png:aqq.gif')
 
 parser.add_argument('--progress', action='store_true',

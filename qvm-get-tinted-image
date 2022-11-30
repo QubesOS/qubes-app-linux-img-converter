@@ -24,7 +24,7 @@ import qubesimgconverter
 
 parser = argparse.ArgumentParser(
         description='Secure copy of images between virtual machines',
-        epilog='Both SRC and DST may specify format in ImageMagick(1) way,\n'
+        epilog='Both SRC and DST may specify format in gm(1) way,\n'
         'i.e. png:aqq.gif')
 
 parser.add_argument('vmname', metavar='VMNAME', help='Source VM')
