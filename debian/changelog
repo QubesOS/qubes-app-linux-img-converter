@@ -1,3 +1,14 @@
+qubes-img-converter (1.2.14-1) unstable; urgency=medium
+
+  [ Mateusz Piórkowski ]
+  * Replace ImageMagick with GraphicsMagick
+
+  [ noskb ]
+  * qvm_convert_img_nautilus.py: Execute external commands
+    asynchronously
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Fri, 16 Dec 2022 19:24:59 +0100
+
 qubes-img-converter (1.2.13-1) unstable; urgency=medium
 
   [ noskb ]
