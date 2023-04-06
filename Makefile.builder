@@ -6,6 +6,7 @@ else ifeq ($(PACKAGE_SET),vm)
   endif
 
   RPM_SPEC_FILES := rpm_spec/qimg-converter.spec
+  ARCH_BUILD_DIRS := archlinux
 endif
 
 # vim: filetype=make

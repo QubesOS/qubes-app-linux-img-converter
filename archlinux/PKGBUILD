@@ -1,0 +1,21 @@
+pkgname=(qubes-img-converter)
+pkgver=$(cat version)
+pkgrel=1
+arch=(x86_64)
+pkgdesc=$(grep "Summary:" ./rpm_spec/qimg-converter.spec.in | sed 's/Summary://' | xargs)
+url=$(git remote get-url origin)
+license=(GPL)
+depends=(
+    python-nautilus
+    #python-qubesimgconverter (included in Arch's qubes-vm-utils)
+    qubes-vm-utils
+)
+
+build() {
+    ln -s "$srcdir"/../ "$srcdir/src"
+}
+
+package() {
+    cd src
+    make install-vm DESTDIR="$pkgdir/"
+}
