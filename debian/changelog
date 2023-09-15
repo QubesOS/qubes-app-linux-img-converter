@@ -1,3 +1,13 @@
+qubes-img-converter (1.2.16-1) unstable; urgency=medium
+
+  [ Alexander Paetzelt ]
+  * Add archlinux package build file
+
+  [ Marek Marczykowski-Górecki ]
+  * archlinux: support builderv2 too
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Fri, 15 Sep 2023 12:51:12 +0200
+
 qubes-img-converter (1.2.15-1) unstable; urgency=medium
 
   [ Maja Kądziołka ]
