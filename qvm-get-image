@@ -21,15 +21,25 @@
 import argparse
 import qubesadmin
 import qubesimgconverter
+import sys
+
+# Maximum --allow-highres supported uncompressed image size =~ 15.6GB
+HIGHRES_WIDTH = 64000
+HIGHRES_HEIGHT = 64000
 
 parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
         description='Secure copy of images between virtual machines',
-        epilog='Both SRC and DST may specify format in gm(1) way,\n'
-        'i.e. png:aqq.gif')
+        epilog='To allow image sizes over 1GB with --allow-highres option,'
+        'increase "/tmp" allocated free space in Source VM.\n'
+        'Both SRC and DST may specify format in gm(1) way,\n'
+        'i.e. png:aqq.gif\n')
 
 parser.add_argument('vmname', metavar='VMNAME', help='Source VM')
 parser.add_argument('src', metavar='SRC', help='Path inside source VM')
 parser.add_argument('dst', metavar='DST', help='Destination path in this VM')
+parser.add_argument('--allow-highres', action='store_true',
+        help=f'Allow pictures up to {HIGHRES_WIDTH}x{HIGHRES_HEIGHT} pixels')
 
 def main():
     args = parser.parse_args()
@@ -43,9 +53,19 @@ def main():
     if vm is None:
         parser.error('No such VM: {0}'.format(args.vmname))
 
-    qubesimgconverter.Image.get_from_vm(vm, args.src).save(args.dst)
+    kwargs = {}
+    if args.allow_highres:
+        kwargs = {'max_width': HIGHRES_WIDTH, 'max_height': HIGHRES_HEIGHT}
 
+    try:
+        qubesimgconverter.Image.get_from_vm(
+                        vm, args.src, **kwargs).save(args.dst)
+    except ValueError as e:
+        app.log.error(e)
+        return 1
+
+    return 0
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
 
 # vim: ft=python sw=4 ts=4 et
