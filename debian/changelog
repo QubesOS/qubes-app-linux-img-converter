@@ -1,3 +1,10 @@
+qubes-img-converter (1.2.17-1) unstable; urgency=medium
+
+  * rpm: adjust dependencies and add BR for directory ownership for
+    openSUSE
+
+ -- Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>  Sat, 20 Jul 2024 03:13:54 +0200
+
 qubes-img-converter (1.2.16-1) unstable; urgency=medium
 
   [ Alexander Paetzelt ]
