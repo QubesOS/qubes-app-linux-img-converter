@@ -1,9 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
-if [ $# -ne 2 ] ; then
-        echo usage: $0 '<img to convert> <location converted file>'
+if [[ $# -ne 2 ]] && [[ $# -ne 3 || "$3" != "--allow-highres" ]]; then
+        echo usage: $0 '<img to convert> <location converted file> [--allow-highres]'
         exit 1
 fi
 

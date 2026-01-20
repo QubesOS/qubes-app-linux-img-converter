@@ -25,15 +25,23 @@ import argparse
 import os
 import qubesimgconverter
 
+# Maximum --allow-highres supported uncompressed image size =~ 15.6GB
+HIGHRES_WIDTH = 64000
+HIGHRES_HEIGHT = 64000
+
 parser = argparse.ArgumentParser(
         description='Trustify image',
-        epilog='Both SRC and DST may specify format in gm(1) way,\n'
-        'i.e. png:aqq.gif')
+        epilog='To allow image sizes over 1GB with --allow-highres option,'
+        'increase "/tmp" allocated free space in Source VM.\n'
+        'Both SRC and DST may specify format in gm(1) way,\n'
+        'i.e. png:aqq.gif\n')
 
 parser.add_argument('--progress', action='store_true',
     help='Print percentage (for zenity --progress)')
 parser.add_argument('src', metavar='SRC', help='Source path')
 parser.add_argument('dst', metavar='DST', help='Destination path')
+parser.add_argument('--allow-highres', action='store_true',
+        help=f'Allow pictures up to {HIGHRES_WIDTH}x{HIGHRES_HEIGHT} pixels')
 
 def main():
     args = parser.parse_args()
@@ -41,7 +49,12 @@ def main():
     if args.progress:
         orig_stdout = open(int(os.environ['SAVED_FD_1']), 'w')
         print('10', file=orig_stdout)
-    img = qubesimgconverter.Image.get_through_dvm(args.src)
+
+    kwargs = {}
+    if args.allow_highres:
+        kwargs = {'max_width': HIGHRES_WIDTH, 'max_height': HIGHRES_HEIGHT}
+
+    img = qubesimgconverter.Image.get_through_dvm(args.src, **kwargs)
     if args.progress: print('50', file=orig_stdout)
     img.save(args.dst)
     if args.progress: print('100', file=orig_stdout)

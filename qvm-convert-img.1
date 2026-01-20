@@ -5,6 +5,7 @@ qvm-convert-img \- convert image file to simple trusted representation
 .B qvm-convert-img
 .IR input-file 
 .IR output-file 
+.IR [--allow-highres]
 .SH DESCRIPTION
 .B qvm-convert-img
 modifies image files by processing them using the 
@@ -16,6 +17,10 @@ Conversion is done to a very simple RGBA representation of the image.
 Any metadata in the original file is removed.
 
 If input-file and output-file are identical then the file is simply overwritten.
+.SH OPTIONS
+.BI \-\-allow-highres
+Allow high resolution pictures up to 64000 x 64000 pixels. This option is
+position-sensitive and is accepted only as the 3rd argument.
 .SH SEE ALSO
 gm(1),
 qvm-convert-pdf(1)
