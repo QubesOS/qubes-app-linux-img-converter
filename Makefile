@@ -25,6 +25,7 @@ VERSION := $(shell cat version)
 help:
 	@echo "Qubes addons main Makefile:" ;\
 	    echo "make rpms                 <--- make rpms and sign them";\
+	    echo "make test                 <--- run integration tests";\
 	    echo; \
 	    echo "make clean                <--- clean all the binary files";\
 	    echo "make update-repo-current  <-- copy newly generated rpms to qubes yum repo";\
@@ -32,6 +33,9 @@ help:
 	    echo "make update-repo-unstable <-- same, but to -testing repo";\
 	    echo "make update-repo-installer -- copy dom0 rpms to installer repo"
 	    @exit 0;
+
+test:
+	python3 -m pytest tests/ -v || python3 tests/test_svg_dimensions.py
 
 rpms: rpms-vm rpms-dom0
 
