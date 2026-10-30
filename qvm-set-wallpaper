@@ -1,0 +1,123 @@
+#!/usr/bin/python3 -O
+
+# The Qubes OS Project, http://www.qubes-os.org
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+import argparse
+import glob
+import os
+import subprocess
+import sys
+import tempfile
+
+import qubesadmin
+import qubesimgconverter
+
+WALLPAPER_DIR = os.path.expanduser('~/.local/share/qubes-wallpaper')
+
+parser = argparse.ArgumentParser(
+        description='Securely set the desktop wallpaper from an image '
+        'stored in a VM',
+        epilog='The image is decoded inside VMNAME (qubes.GetImageRGBA) '
+        'and only raw pixels, checked for size, reach this qube, so the '
+        'original file is never parsed here. Decoding a malicious image '
+        'can still compromise VMNAME itself: if you do not trust it, run '
+        'qvm-convert-img on it in VMNAME first, which decodes it in a '
+        'disposable.')
+
+parser.add_argument('vmname', metavar='VMNAME', help='Source VM')
+parser.add_argument('src', metavar='SRC', help='Path inside source VM')
+parser.add_argument('--output', '-o', metavar='DST',
+        help='Where to save the converted PNG (default: a new file in '
+        '{0})'.format(WALLPAPER_DIR))
+
+
+def set_wallpaper(path: str) -> bool:
+    """Set path as wallpaper in the current desktop environment.
+
+    Return False if the desktop environment is not supported."""
+    desktop = os.environ.get('XDG_CURRENT_DESKTOP', '').lower()
+    if 'xfce' in desktop:
+        properties = subprocess.check_output(
+            ['xfconf-query', '-c', 'xfce4-desktop', '-l'], text=True)
+        # one property per monitor and workspace
+        for prop in properties.splitlines():
+            if prop.endswith('/last-image'):
+                subprocess.check_call(['xfconf-query', '-c', 'xfce4-desktop',
+                    '-p', prop, '-s', path])
+    elif any(de in desktop for de in ('gnome', 'cinnamon', 'unity')):
+        uri = 'file://' + path
+        subprocess.check_call(['gsettings', 'set',
+            'org.gnome.desktop.background', 'picture-uri', uri])
+        # GNOME >= 42 uses another key in dark mode, absent before
+        subprocess.call(['gsettings', 'set', 'org.gnome.desktop.background',
+            'picture-uri-dark', uri], stderr=subprocess.DEVNULL)
+    elif 'kde' in desktop:
+        subprocess.check_call(['plasma-apply-wallpaperimage', path])
+    else:
+        return False
+    return True
+
+
+def main() -> None:
+    args = parser.parse_args()
+
+    app = qubesadmin.Qubes()
+    try:
+        vm = app.domains[args.vmname]
+    except KeyError:
+        vm = None
+
+    if vm is None:
+        parser.error('No such VM: {0}'.format(args.vmname))
+
+    try:
+        image = qubesimgconverter.Image.get_from_vm(vm, args.src)
+    except Exception as e:  # pylint: disable=broad-except
+        sys.exit('Failed to get {0} from {1}: {2}'.format(
+            args.src, args.vmname, e))
+
+    if args.output:
+        dst = os.path.abspath(args.output)
+    else:
+        os.makedirs(WALLPAPER_DIR, exist_ok=True)
+        # a new name each time, desktops do not reload a path already set
+        fd, dst = tempfile.mkstemp(prefix='wallpaper-', suffix='.png',
+            dir=WALLPAPER_DIR)
+        os.close(fd)
+
+    # force the output format, whatever the extension of dst
+    image.save('png:' + dst)
+
+    try:
+        supported = set_wallpaper(dst)
+    except (subprocess.CalledProcessError, FileNotFoundError) as e:
+        sys.exit('Failed to set wallpaper ({0}), image saved to {1}'.format(
+            e, dst))
+    if not supported:
+        sys.exit('Unsupported desktop environment, image saved to {0}, set '
+            'it as wallpaper in your desktop settings'.format(dst))
+
+    if not args.output:
+        for old in glob.glob(os.path.join(WALLPAPER_DIR, 'wallpaper-*.png')):
+            if old != dst:
+                os.remove(old)
+
+
+if __name__ == '__main__':
+    main()
+
+# vim: ft=python sw=4 ts=4 et

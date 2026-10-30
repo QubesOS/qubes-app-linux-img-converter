@@ -51,6 +51,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/bin/
 install -D qvm-get-image $RPM_BUILD_ROOT/usr/bin/qvm-get-image
 install -D qvm-get-tinted-image $RPM_BUILD_ROOT/usr/bin/qvm-get-tinted-image
+install -D qvm-set-wallpaper $RPM_BUILD_ROOT/usr/bin/qvm-set-wallpaper
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -59,6 +60,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 /usr/bin/qvm-get-image
 /usr/bin/qvm-get-tinted-image
+/usr/bin/qvm-set-wallpaper
 
 %changelog
 @CHANGELOG@
